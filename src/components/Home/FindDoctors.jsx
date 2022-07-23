@@ -53,7 +53,7 @@ const FindDoctors = () => {
             doctorSpeciality={ele.doctorSpeciality}
 
             />) : 
-              <Text>Loading..........</Text>}
+              <Text color="red.800">Loading..........</Text>}
             
         </GridItem>
         <GridItem
