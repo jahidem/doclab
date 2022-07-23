@@ -26,7 +26,7 @@ const FindDoctors = () => {
         setAllDocs(res.data);
         setLoading(false);
       }
-      //fetchDocs();
+      fetchDocs();
   }, []);
   
   console.log(allDocs);
