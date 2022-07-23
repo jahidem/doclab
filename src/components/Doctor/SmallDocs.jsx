@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react";
 const SmallDocs = ({allDocs,loading}) =>{
   return(<Box>
-    {allDocs}
+    {!loading? allDocs:"Loading........."}
   </Box>)
 }
 
