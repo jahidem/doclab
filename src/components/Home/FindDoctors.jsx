@@ -7,11 +7,13 @@ const FindDoctors = () => {
   const [allDocs, setAllDocs] = useState([
     {
       doctorId: 1,
-      doctorName: 'emon'
+      doctorName: 'emon',
+      doctorDistrict: 'Dhaka'
     },
     {
       doctorId: 2,
-      doctorName: 'kmon'
+      doctorName: 'kmon',
+      doctorDistrict: 'Cumilla'
     },
   ]);
   const [loading,setLoading] = useState(false);
@@ -24,33 +26,40 @@ const FindDoctors = () => {
         setAllDocs(res.data);
         setLoading(false);
       }
-      fetchDocs();
+      //fetchDocs();
   }, []);
   
   console.log(allDocs);
   return (
     <Box>
       <Header />
-      <Grid h="800px" templateColumns="repeat(3, 1fr)" gap={2}>
+      <Grid h="800px" templateColumns="400px 1fr 1fr" gap={0}>
         <GridItem
+         
           borderRadius={5}
-          marginBlockStart={2}
-          marginLeft={2}
+          marginBlockStart={5}
+          marginLeft={5}
           colSpan={1}
-          bg="blue.100"
+          bg="#091336"
         >
-          <Text textAlign="center" fontSize={18} paddingTop={4}>
+          <Text 
+          textColor="twitter.100"
+          textAlign="center" fontSize={18} paddingTop={4}>
             List of Doctors
           </Text>
-          <SmallDocs allDocs={allDocs[0].doctorName} loading={loading}/>
+         {!loading? allDocs.map((ele)=><SmallDocs doctorId={ele.doctorId}
+            doctorName={ele.doctorName}
+            doctorDistrict={ele.doctorDistrict}
+            />) : 
+              <Text>Loading..........</Text>}
             
         </GridItem>
         <GridItem
           borderRadius={5}
-          marginBlockStart={2}
-          marginRight={2}
+          marginBlockStart={5}
+          marginRight={5}
           colSpan={2}
-          bg="gray.100"
+          bg="gray.200"
         />
       </Grid>
     </Box>
