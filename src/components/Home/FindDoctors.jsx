@@ -26,7 +26,7 @@ const FindDoctors = () => {
         setAllDocs(res.data);
         setLoading(false);
       }
-      //fetchDocs();
+      fetchDocs();
   }, []);
   
   console.log(allDocs);
@@ -47,9 +47,11 @@ const FindDoctors = () => {
           textAlign="center" fontSize={18} paddingTop={4}>
             List of Doctors
           </Text>
-         {!loading? allDocs.map((ele)=><SmallDocs doctorId={ele.doctorId}
+         {!loading? allDocs.map((ele)=><SmallDocs doctorId={ele.doctorID}
             doctorName={ele.doctorName}
             doctorDistrict={ele.doctorDistrict}
+            doctorSpeciality={ele.doctorSpeciality}
+
             />) : 
               <Text>Loading..........</Text>}
             

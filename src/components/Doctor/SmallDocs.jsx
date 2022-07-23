@@ -1,5 +1,5 @@
 import { Box,Text } from "@chakra-ui/react";
-const SmallDocs = ({doctorId,doctorName,doctorDistrict}) =>{
+const SmallDocs = ({doctorId,doctorName,doctorDistrict,doctorSpeciality}) =>{
   return(
   <Box 
   w='100%'
@@ -20,6 +20,9 @@ const SmallDocs = ({doctorId,doctorName,doctorDistrict}) =>{
     <Text 
     color="gray.500"
     >From {doctorDistrict}
+    </Text><Text
+    color="red.200">
+    proficient in {doctorSpeciality}
     </Text>
   </Box>)
 }
