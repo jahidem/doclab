@@ -72,6 +72,7 @@ const FindDoctors = () => {
           >
             List of Doctors
           </Text>
+<<<<<<< HEAD
           <Search searchValue={searchValue} handleSearch={handleSearch} />
           {!loading ? (
             printableDocList.map((ele) => (
@@ -87,6 +88,16 @@ const FindDoctors = () => {
               Loading..........
             </Text>
           )}
+=======
+         {!loading? allDocs.map((ele)=><SmallDocs doctorId={ele.doctorID}
+            doctorName={ele.doctorName}
+            doctorDistrict={ele.doctorDistrict}
+            doctorSpeciality={ele.doctorSpeciality}
+
+            />) : 
+              <Text color="red.800">Loading..........</Text>}
+            
+>>>>>>> 299d4b2e8cc1cdd49c5f9fd5a144c99ac3a23b51
         </GridItem>
         <GridItem
           borderRadius={5}
