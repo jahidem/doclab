@@ -2,13 +2,13 @@ import { Box,Text } from "@chakra-ui/react";
 const SmallDocs = ({doctorId,doctorName,doctorDistrict,doctorSpeciality}) =>{
   return(
   <Box 
-  w='100%'
   bgColor='whiteAlpha.200'
   p = {2}
-  margin={3}  
+  margin="4px 8px" 
   fontSize={14}
   fontStyle="bold"
   color="white"
+  borderRadius="5px"
   >
     <Text 
       

@@ -1,13 +1,14 @@
-import {Link,Text,Box, Flex, List, ListItem, UnorderedList, Image } from '@chakra-ui/react';
+import {useMediaQuery, Link,Text,Box, Flex, List, ListItem, UnorderedList, Image } from '@chakra-ui/react';
 import { Link as ReachLink } from "react-router-dom"
 
 
 const Header = () => {
+
   return (
     
     <Flex 
-    bgColor="red"
-    bgImage="url('images/headd.png')"
+    bgColor="green.100"
+    // bgImage="url('images/headd2.png')"
     bgRepeat="repeat-x"
     
     
@@ -41,9 +42,9 @@ const Header = () => {
           Medicines
           </Link>
         
-      </Flex>
+      </Flex> 
 
-
+  
       <Flex width="350px" height="40px"  justify="space-between"  color="#606060" marginRight="100px">
         <Box  fontSize="16px" fontWeight="semibold"
         cursor="pointer"
@@ -66,6 +67,7 @@ const Header = () => {
         </Link>
        
       </Flex>
+      
     </Flex>
     </Flex>
   );

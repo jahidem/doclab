@@ -1,4 +1,4 @@
-import Header from './Header';
+import Header from '../common/Header';
 const LabTests = () =>{
   return(<>
   <Header/><h1>

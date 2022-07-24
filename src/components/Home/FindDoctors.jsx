@@ -1,60 +1,92 @@
-import { Box, Grid, GridItem, Text } from '@chakra-ui/react';
-import Header from './Header';
+import { useMediaQuery, Box, Grid, GridItem, Text } from '@chakra-ui/react';
+import Header from '../common/Header';
+import MobileHeader from '../common/MobileHeader';
 import { useState, useEffect } from 'react';
 import SmallDocs from '../Doctor/SmallDocs';
 import axios from 'axios';
+import Search from '../common/Search';
 const FindDoctors = () => {
-  const [allDocs, setAllDocs] = useState([
+  const initialData = [
     {
       doctorId: 1,
       doctorName: 'emon',
-      doctorDistrict: 'Dhaka'
+      doctorDistrict: 'Dhaka',
     },
     {
       doctorId: 2,
       doctorName: 'kmon',
-      doctorDistrict: 'Cumilla'
+      doctorDistrict: 'Cumilla',
     },
-  ]);
-  const [loading,setLoading] = useState(false);
+  ];
+
+  const [isNotMobile] = useMediaQuery('(min-width: 600px)');
+  const [searchValue, setSearchValue] = useState('');
+  const [printableDocList, setPrintableDocList] = useState(initialData);
+  const handleSearch = (event) => {
+    setSearchValue(event.target.value);
+  };
+  const [allDocs, setAllDocs] = useState(initialData);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-      const fetchDocs = async ()=>{
-        setLoading(true);
-        const res = await axios.get('https://doclab-backend.herokuapp.com/doctors');
-        
-        setAllDocs(res.data);
-        setLoading(false);
-      }
-      fetchDocs();
+    const fetchDocs = async () => {
+      setLoading(true);
+      const res = await axios.get(
+        'https://doclab-backend.herokuapp.com/doctors'
+      );
+      setPrintableDocList(res.data);
+      setAllDocs(res.data);
+      setLoading(false);
+    };
+    fetchDocs();
   }, []);
-  
-  console.log(allDocs);
+
+  useEffect(() => {
+    const filterDocBySearch = () => {
+      const arr = allDocs.filter(
+        (ele) => ele.doctorName.toLowerCase() === searchValue.toLowerCase()
+      );
+      setPrintableDocList(arr);
+    };
+
+    filterDocBySearch();
+  }, [searchValue]);
+
+  console.log(searchValue);
   return (
     <Box>
-      <Header />
-      <Grid h="800px" templateColumns="400px 1fr 1fr" gap={0}>
+      {isNotMobile ? <Header /> : <MobileHeader />}
+      <Grid h="800px" templateColumns="350px 1fr 1fr" gap={0}>
         <GridItem
-         
           borderRadius={5}
           marginBlockStart={5}
           marginLeft={5}
           colSpan={1}
           bg="#091336"
         >
-          <Text 
-          textColor="twitter.100"
-          textAlign="center" fontSize={18} paddingTop={4}>
+          <Text
+            textColor="twitter.100"
+            textAlign="center"
+            fontSize={18}
+            paddingTop={4}
+          >
             List of Doctors
           </Text>
-         {!loading? allDocs.map((ele)=><SmallDocs doctorId={ele.doctorID}
-            doctorName={ele.doctorName}
-            doctorDistrict={ele.doctorDistrict}
-            doctorSpeciality={ele.doctorSpeciality}
-
-            />) : 
-              <Text>Loading..........</Text>}
-            
+          <Search searchValue={searchValue} handleSearch={handleSearch} />
+          {!loading ? (
+            printableDocList.map((ele) => (
+              <SmallDocs
+                doctorId={ele.doctorID}
+                doctorName={ele.doctorName}
+                doctorDistrict={ele.doctorDistrict}
+                doctorSpeciality={ele.doctorSpeciality}
+              />
+            ))
+          ) : (
+            <Text margin="20px" color="whiteAlpha.600">
+              Loading..........
+            </Text>
+          )}
         </GridItem>
         <GridItem
           borderRadius={5}
