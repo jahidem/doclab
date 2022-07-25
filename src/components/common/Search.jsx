@@ -7,7 +7,7 @@ const Search = ({searchValue,handleSearch}) =>{
       variant='flushed'
         margin="24px 18px"
         width="80%"
-        color="whiteAlpha.700"
+        color="black"
         placeholder="Search for doctors"
         type="text"
         value={searchValue}

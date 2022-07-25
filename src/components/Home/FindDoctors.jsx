@@ -43,14 +43,19 @@ const FindDoctors = () => {
 
   useEffect(() => {
     const filterDocBySearch = () => {
-      const arr = allDocs.filter(
-        (ele) =>{
-          for(var u=0;u<Math.min(ele.doctorName.length,searchValue.length);u++)
-            if(searchValue[u].toLocaleLowerCase()!=ele.doctorName[u].toLocaleLowerCase())
-              return false;
-          return true;
-        }
-      );
+      const arr = allDocs.filter((ele) => {
+        for (
+          var u = 0;
+          u < Math.min(ele.doctorName.length, searchValue.length);
+          u++
+        )
+          if (
+            searchValue[u].toLocaleLowerCase() !=
+            ele.doctorName[u].toLocaleLowerCase()
+          )
+            return false;
+        return true;
+      });
       setPrintableDocList(arr);
     };
 
@@ -59,48 +64,73 @@ const FindDoctors = () => {
 
   console.log(searchValue);
   return (
-    <Box>
+    <Box  overflow=""> 
       {isNotMobile ? <Header /> : <MobileHeader />}
-      <Grid h="800px" templateColumns="350px 1fr 1fr" gap={0}>
-        <GridItem
-          borderRadius={5}
-          marginBlockStart={5}
-          marginLeft={5}
-          colSpan={1}
-          bg="#091336"
-        >
-          <Text
-            textColor="twitter.100"
-            textAlign="center"
-            fontSize={18}
-            paddingTop={4}
+        <Grid  templateColumns="520px 1fr 1fr" gap={5}
+        templateRows="calc(100vh-85px)">
+          <GridItem
+            borderRadius={5}
+            marginBlockStart={5}
+            marginLeft={5}
+            colSpan={1}
+            p="10px"
+            bg="#F1F1F1"
           >
-            List of Doctors
-          </Text>
-          <Search searchValue={searchValue} handleSearch={handleSearch} />
-          {!loading ? (
-            printableDocList.map((ele) => (
-              <SmallDocs
-                doctorId={ele.doctorID}
-                doctorName={ele.doctorName}
-                doctorDistrict={ele.doctorDistrict}
-                doctorSpeciality={ele.doctorSpeciality}
-              />
-            ))
-          ) : (
-            <Text margin="20px" color="whiteAlpha.600">
-              Loading..........
+            <Text
+              textColor="twitter.800"
+              fontWeight="bold"
+              textAlign="center"
+              fontSize={18}
+              paddingTop={4}
+            >
+              List of Doctors
             </Text>
-          )}
-        </GridItem>
-        <GridItem
-          borderRadius={5}
-          marginBlockStart={5}
-          marginRight={5}
-          colSpan={2}
-          bg="gray.200"
-        />
-      </Grid>
+            <Search searchValue={searchValue} handleSearch={handleSearch} />
+            <Box h="calc(100vh - 280px)" overflow="scroll" p="5px"
+              css={{
+                "&::-webkit-scrollbar": {
+                  width: "8px",
+                  
+                },
+                "&::-webkit-scrollbar-track": {
+                  width: "2px",
+                  
+
+                },
+                "&::-webkit-scrollbar-thumb": {
+                  background: "#B0BEC5",
+                  borderRadius: "10px",
+                  
+                },
+              }}
+            >
+              {!loading ? (
+                printableDocList.map((ele) => (
+                  <SmallDocs
+                    doctorId={ele.doctorID}
+                    doctorName={ele.doctorName}
+                    doctorDistrict={ele.doctorDistrict}
+                    doctorSpeciality={ele.doctorSpeciality}
+                  />
+                ))
+              ) : (
+                <Text margin="20px" color="#76BA99">
+                  Loading..........
+                </Text>
+              )}
+            </Box>
+          </GridItem>
+          <GridItem
+           height="inherit"
+            borderRadius={5}
+            marginBlockStart={5}
+            marginRight={5}
+            colSpan={2}
+            bg="gray.200"
+          >
+            adfdasfa
+          </GridItem>
+        </Grid>
     </Box>
   );
 };

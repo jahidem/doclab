@@ -10,7 +10,7 @@ const Main = () => {
   return (
     <Router>
       {/* <Home/> */}
-      <Box width="100vw" height="100vh">
+      <Box width="100vw" height="100vh" overflow="hidden">
         <Routes>
           <Route path="/" exact element={<Home />} />
           <Route path="home" element={<Home />} />
